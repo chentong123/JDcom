@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">JDcom</string>
+    <string name="app_home">首页</string>
+    <string name="app_class">分类</string>
+    <string name="app_cart">购物车</string>
+    <string name="app_user">个人</string>
+    <string name="app_search">搜索一下</string>
+    <string name="app_shang">商品:0</string>
+    <string name="app_dian">店铺:0</string>
+    <string name="app_wo">我的足迹</string>
+    <string name="app_ding">全部订单</string>
+    <string name="app_cai">我的财产</string>
+    <string name="app_wei1">未付款</string>
+    <string name="app_wei2">待发货</string>
+    <string name="app_wei3">待收货</string>
+    <string name="app_wei4">待评价</string>
+    <string name="app_wei5">退款/货</string>
+    <string name="app_yu1">预存款</string>
+    <string name="app_yu2">充值卡</string>
+    <string name="app_yu3">代金券</string>
+    <string name="app_yu4">红包</string>
+    <string name="app_yu5">积分</string>
+    <string name="app_shou">收货地址</string>
+    <string name="app_xi">系统设置</string>
+</resources>
