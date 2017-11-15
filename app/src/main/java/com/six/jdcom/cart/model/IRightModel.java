@@ -5,5 +5,5 @@ package com.six.jdcom.cart.model;
  */
 
 public interface IRightModel {
-    void getRight(String url);
+    void getRight(String url,String gc_id);
 }
