@@ -91,8 +91,8 @@ public class LoginActivity extends AppCompatActivity implements IViewLogin {
     public void success(String code) {
         if("0".equals(code)){
             SharePresenters.put("islogin",true);
-            finish();
-           // startActivity(new Intent(LoginActivity.this,MainActivity.class));
+           // finish();
+           startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }else{
             Toast.makeText(LoginActivity.this, "账号或密码错误~", Toast.LENGTH_SHORT).show();
         }

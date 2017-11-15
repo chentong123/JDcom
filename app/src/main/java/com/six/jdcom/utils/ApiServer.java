@@ -3,6 +3,8 @@ package com.six.jdcom.utils;
 
 import com.six.jdcom.cart.bean.DataleftBean;
 import com.six.jdcom.cart.bean.DatarightBean;
+import com.six.jdcom.cart.bean.DateGridBean;
+import com.six.jdcom.cart.bean.Datebeanitem;
 import com.six.jdcom.home.bean.HomeBean;
 import com.six.jdcom.mine.bean.Login;
 
@@ -32,7 +34,8 @@ public interface ApiServer {
     Observable<DataleftBean> getLeft();
 
     @GET("index.php?act=goods_class")
-    Observable<DatarightBean> getRight();
+    Observable<DatarightBean> getRight(@Query("gc_id") String gc_id );
 
-
+    @GET("index.php?act=goods_class")
+    Observable<DateGridBean> getThree();
 }
