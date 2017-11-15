@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.six.jdcom.R;
 import com.six.jdcom.cart.bean.DateGridBean;
+import com.six.jdcom.cart.presenter.ThreePresenter;
+import com.six.jdcom.cart.view.ThreeView;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ import java.util.List;
  * version: $version$
  */
 
-public class MyAdapter_TypeGridView extends BaseAdapter {
+public class MyAdapter_TypeGridView extends BaseAdapter{
     private Context context;
     private List<DateGridBean.DatasBean.ClassListBean> list;
 
@@ -60,6 +62,9 @@ public class MyAdapter_TypeGridView extends BaseAdapter {
         holder.tv.setText(list.get(position).getGc_name());
         return convertView;
     }
+
+
+
     class ViewHolder{
         TextView tv;
     }

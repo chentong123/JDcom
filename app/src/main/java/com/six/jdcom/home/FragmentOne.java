@@ -11,16 +11,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.six.jdcom.R;
-import com.six.jdcom.activity.CaptureActivity;
 import com.six.jdcom.activity.SearchActivity;
 import com.six.jdcom.adpater.XRAdapter;
 import com.six.jdcom.home.bean.HomeBean;
 import com.six.jdcom.home.presenter.UserPresenter;
 import com.six.jdcom.home.view.IUserView;
 import com.six.jdcom.utils.Api;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,7 @@ public class FragmentOne extends Fragment implements IUserView{
         switch (view.getId()) {
             case R.id.erweima:
                 startActivityForResult(new Intent(getActivity(), CaptureActivity.class),0);
+                Toast.makeText(getContext(),"wowo",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search:
                 Intent intent=new Intent(getActivity(), SearchActivity.class);

@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".activity.CaptureActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.DianJi2Activity" />
         <activity android:name=".mine.LoginActivity" />
         <activity android:name=".activity.SecondActivity" />
         <activity android:name=".activity.DiSanFangActivity" />
-        <activity android:name=".mine.RegisterActivity"></activity>
+        <activity android:name=".mine.RegisterActivity" />
+        <activity android:name=".activity.BannerActivity"></activity>
     </application>
 
 </manifest>

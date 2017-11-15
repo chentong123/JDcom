@@ -14,11 +14,20 @@ import com.six.jdcom.cart.GsonObjectCallback;
 import com.six.jdcom.cart.OkHttp3Utils;
 import com.six.jdcom.cart.bean.DatarightBean;
 import com.six.jdcom.cart.bean.DateGridBean;
+import com.six.jdcom.utils.Api;
+import com.six.jdcom.utils.ApiServer;
 
 import java.io.IOException;
 import java.util.List;
 
 import okhttp3.Call;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * autour: 樊彦龙
@@ -48,18 +57,31 @@ public class MyAdapter_right extends RecyclerView.Adapter<RecyclerView.ViewHolde
         final MyLeftViewHolder myHolder = new MyLeftViewHolder(holder.itemView);
         //设置标题
         myHolder.tv_left_type.setText(list.get(position).getGc_name());
-        //第三次请求网络 获取第三级数据
-        OkHttp3Utils.doGet(API.TYPE_PATH + "&gc_id=" + list.get(position).getGc_id(), new GsonObjectCallback<DateGridBean>() {
-            @Override
-            public void onUi(DateGridBean dateGridBean) {
-                myHolder.gv.setAdapter(new MyAdapter_TypeGridView(context,dateGridBean.getDatas().getClass_list()));
-            }
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.TYPE_PATH)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+        ApiServer apiService = retrofit.create(ApiServer.class);
+        Observable<DateGridBean> three = apiService.getThree();
+        three.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<DateGridBean>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onFailed(Call call, IOException e) {
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(DateGridBean dateGridBean) {
+                        List<DateGridBean.DatasBean.ClassListBean> class_list = dateGridBean.getDatas().getClass_list();
+                        myHolder.gv.setAdapter(new MyAdapter_TypeGridView(context,class_list));
+                    }
+                });
 
     }
 
