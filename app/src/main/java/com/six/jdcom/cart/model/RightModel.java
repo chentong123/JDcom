@@ -31,14 +31,14 @@ public class RightModel implements IRightModel{
     }
 
     @Override
-    public void getRight(String url) {
+    public void getRight(String url,String gc_id) {
         Retrofit retrofit = new Retrofit
                 .Builder().baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         ApiServer apiService = retrofit.create(ApiServer.class);
-        final Observable<DatarightBean> right = apiService.getRight();
+        final Observable<DatarightBean> right = apiService.getRight(gc_id);
         right.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DatarightBean>() {

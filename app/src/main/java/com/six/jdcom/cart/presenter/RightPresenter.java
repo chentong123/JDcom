@@ -19,8 +19,8 @@ public class RightPresenter implements RightModel.OnRightFinish{
         this.rightModel = new RightModel();
         rightModel.setOnFinish(this);
     }
-    public void setNewr(String url){
-        rightModel.getRight(url);
+    public void setNewr(String url,String gc_id){
+        rightModel.getRight(url,gc_id);
     }
     @Override
     public void OnFinishListener(List<DatarightBean.DatasBean.ClassListBean> right) {
