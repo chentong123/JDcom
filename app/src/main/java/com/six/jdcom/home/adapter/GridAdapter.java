@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 
 import com.six.jdcom.R;
+import com.six.jdcom.home.ListActivity;
 import com.six.jdcom.home.Shop1;
 import com.six.jdcom.home.XiangqingActivty;
 import com.six.jdcom.home.bean.RightBean;
@@ -68,9 +69,9 @@ public class GridAdapter extends BaseAdapter{
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, XiangqingActivty.class);
+                Intent intent=new Intent(context, ListActivity.class);
 
-                EventBus.getDefault().postSticky(new Shop1(data.get(position).getPscid()+""));
+               EventBus.getDefault().postSticky(new Shop1(data.get(position).getPscid()+""));
                 context.startActivity(intent);
             }
         });
