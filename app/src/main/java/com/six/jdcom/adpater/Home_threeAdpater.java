@@ -1,6 +1,7 @@
 package com.six.jdcom.adpater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.six.jdcom.R;
+import com.six.jdcom.home.ShopActivity;
 import com.six.jdcom.home.bean.HomeBean;
 import com.six.jdcom.utils.OnItemClickLitener;
 
@@ -56,7 +58,13 @@ public class Home_threeAdpater  extends RecyclerView.Adapter<MyViewHolder1> {
         //得到图片的url
         Uri uri= Uri.parse(data1.get(position).getActivityImg());
         holder.imageView1.setImageURI(uri);//设置给Fresco
-
+        holder.imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(mcontext1, ShopActivity.class);
+                mcontext1.startActivity(intent);
+            }
+        });
     }
 
     @Override

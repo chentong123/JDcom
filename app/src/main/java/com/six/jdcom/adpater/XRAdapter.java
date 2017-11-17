@@ -9,12 +9,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.six.jdcom.R;
+import com.six.jdcom.activity.BannerActivity;
 import com.six.jdcom.activity.SearchActivity;
+import com.six.jdcom.activity.SecondActivity;
+import com.six.jdcom.home.ShopActivity;
+import com.six.jdcom.home.bean.Ad_type_dynamic_data;
 import com.six.jdcom.home.bean.HomeBean;
 import com.six.jdcom.home.bean.User;
 import com.six.jdcom.utils.GlideImageLoader;
@@ -96,7 +101,18 @@ public class XRAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((ViewHolderA) holder).mbanner.setImageLoader(new GlideImageLoader());
             ((ViewHolderA) holder).mbanner.setImages(mlist);
             ((ViewHolderA) holder).mbanner.start();
-
+            ((ViewHolderA) holder).mbanner.setOnBannerListener(new OnBannerListener() {
+                @Override
+                public void OnBannerClick(int position) {
+                    String ad_type_dynamic_data1 = list.getAd1().get(0).getAd_type_dynamic_data();
+                    /*for(int j=0;j<list.getAd1().size();j++){
+                        String ad_type_dynamic_data = list.getAd1().get(j).getAd_type_dynamic_data();
+                    }*/
+                    EventBus.getDefault().postSticky(new Ad_type_dynamic_data(ad_type_dynamic_data1));
+                    Intent intent=new Intent(mcontext,BannerActivity.class);
+                    mcontext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof ViewHolderB) {
 
             final List<HomeBean.DataBean.Ad5Bean> ad5 = list.getAd5();
@@ -127,21 +143,30 @@ public class XRAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             holderC.recyclerView1.setLayoutManager(linearLayoutManager);
             Home_threeAdpater adapter1 = new Home_threeAdpater(data1,mcontext);
             holderC.recyclerView1.setAdapter(adapter1);
+            adapter1.setOnItemClickLitener(new OnItemClickLitener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent=new Intent(mcontext, ShopActivity.class);
+                    mcontext.startActivity(intent);
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position) {
+
+                }
+            });
         }else if (holder instanceof ViewHolderD) {
-           /* mlist1=new ArrayList();
-            for(int i=0;i<list.getSubjects().size();i++){
-                mlist1.add(list.getSubjects().get(i).getImage());
-            }
-            //设置图片加载器
-            ((ViewHolderD) holder).mybanner1.setImageLoader(new GlideImageLoader());
-            ((ViewHolderD) holder).mybanner1.setImages(mlist1);
-            ((ViewHolderD) holder).mybanner1.start();*/
             String s=list.getSubjects().get(2).getDescImage();
             ViewHolderD holderD= (ViewHolderD) holder;
-            //ImageLoader.getInstance().displayImage(s,((ViewHolderD) holder).d_img);
-            //得到图片的url
             Uri uri= Uri.parse(list.getSubjects().get(2).getDescImage());
             holderD.d_img.setImageURI(uri);//设置给Fresco
+            holderD.d_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(mcontext, ShopActivity.class);
+                    mcontext.startActivity(intent);
+                }
+            });
         }else if (holder instanceof ViewHolderE)
         {
             goods = list.getSubjects().get(2).getGoodsList();
@@ -151,6 +176,13 @@ public class XRAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             holderE.recy2.setLayoutManager(linearLayoutManager);
             Home_fourAdpater adapter2 = new Home_fourAdpater(goods,mcontext);
             holderE.recy2.setAdapter(adapter2);
+            adapter2.setOnItemClickLitener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent=new Intent(mcontext, ShopActivity.class);
+                    mcontext.startActivity(intent);
+                }
+            });
         }else if(holder instanceof ViewHolderF)
         {
             goods2=list.getSubjects().get(3).getGoodsRelationList();
@@ -158,11 +190,10 @@ public class XRAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             holderF.recy3.setLayoutManager(new GridLayoutManager(mcontext,2));
             Home_fiveAdpater adapter3 = new Home_fiveAdpater(goods2,mcontext);
             holderF.recy3.setAdapter(adapter3);
-           /* adapter3.setOnItemClickLitener(new OnItemClickLitener() {
+            adapter3.setOnItemClickLitener(new OnItemClickLitener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent=new Intent(mcontext, DianJi2Activity.class);
-                    intent.putExtra("b",goods2.get(position).getGoodsName());
+                    Intent intent=new Intent(mcontext, ShopActivity.class);
                     mcontext.startActivity(intent);
                 }
 
@@ -170,7 +201,7 @@ public class XRAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 public void onItemLongClick(View view, int position) {
 
                 }
-            });*/
+            });
         }
     }
 
