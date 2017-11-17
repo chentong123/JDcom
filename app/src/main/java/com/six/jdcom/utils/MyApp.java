@@ -20,6 +20,8 @@ public class MyApp extends Application{
         mInstance = this;
         Fresco.initialize(this);
         context=getApplicationContext();
+        ImageLoaderConfiguration de=ImageLoaderConfiguration.createDefault(getApplicationContext());
+        ImageLoader.getInstance().init(de);
     }
     public static Context getcontext(){
         return context;

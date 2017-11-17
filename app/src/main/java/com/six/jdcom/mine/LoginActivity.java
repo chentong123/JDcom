@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity implements IViewLogin {
     public void success(String code) {
         if("0".equals(code)){
             SharePresenters.put("islogin",true);
+
            // finish();
            startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }else{
