@@ -29,7 +29,6 @@ public class SharePresenters {
      */
     public static void put( String key, Object object)
     {
-
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

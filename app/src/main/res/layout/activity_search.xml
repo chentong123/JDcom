@@ -9,5 +9,33 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.six.jdcom.activity.SearchActivity">
+    <RelativeLayout
+        android:id="@+id/re"
 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="370dp"
+            android:layout_height="40dp"
+            android:drawableRight="@mipmap/ic_normal_search"
+            android:layout_marginLeft="50dp"
+
+            android:hint="@string/app_search"
+            android:focusable="false"
+            android:gravity="center"
+            android:textColor="@color/colorse"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_normal_message"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="5dp"
+            />
+    </RelativeLayout>
 </RelativeLayout>
