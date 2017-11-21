@@ -6,12 +6,15 @@ import com.six.jdcom.cart.bean.DatarightBean;
 import com.six.jdcom.cart.bean.DateGridBean;
 import com.six.jdcom.cart.bean.Datebeanitem;
 import com.six.jdcom.home.Linear;
+import com.six.jdcom.home.activity.AddSelect;
 import com.six.jdcom.home.bean.Add;
 import com.six.jdcom.home.bean.HomeBean;
 import com.six.jdcom.home.bean.KindBean;
+import com.six.jdcom.home.bean.Order;
 import com.six.jdcom.home.bean.RightBean;
 import com.six.jdcom.home.bean.Shop;
 import com.six.jdcom.mine.bean.Login;
+import com.six.jdcom.mine.bean.Register;
 import com.six.jdcom.sort.bean.Select;
 
 import java.util.HashMap;
@@ -29,13 +32,15 @@ import rx.Observable;
  */
 
 public interface ApiServer {
-
+    //首页
     @GET("umIPmfS6c83237d9c70c7c9510c9b0f97171a308d13b611?uri=homepage")
     Observable<HomeBean> getHome();
+    //登录
      @POST
     Observable<Login> getLogin(@Url String url, @QueryMap Map<String, String> map);
+    //注册
     @POST
-    Observable<Login> getRegister(@Url String url, @QueryMap Map<String, String> map);
+    Observable<Register> getRegister(@Url String url, @QueryMap Map<String, String> map);
 
     @GET("index.php?act=goods_class")
     Observable<DataleftBean> getLeft();
@@ -56,11 +61,17 @@ public interface ApiServer {
 
     @POST
     Observable<Linear> getList(@Url String str, @QueryMap Map<String,String> map);
-
+    //添加购物车
     @POST
     Observable<Add> getAdd(@Url String str, @QueryMap Map<String,String> map);
 
     //查询购物车
     @POST("product/getCarts")
     Observable<Select> getcartgoods(@Query("uid") String uid);
+    //创建订单
+    @POST
+    Observable<Order> getOrder(@Url String url,@QueryMap Map<String,String> map);
+    //查询订单
+    @POST()
+    Observable<AddSelect> getadd(@Url String url,@QueryMap Map<String,String> map);
 }

@@ -30,5 +30,4 @@ public class RetorFactoryLogin {
     public static ApiServer getInstance() {
         return retrofitService;
     }
-
 }
