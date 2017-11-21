@@ -26,15 +26,16 @@ import com.six.jdcom.sort.bean.StoreInfo;
 import com.six.jdcom.sort.presenter.SelectPresenter;
 import com.six.jdcom.sort.view.ISelectView;
 import com.six.jdcom.utils.SharePresenters;
+import com.six.jdcom.utils.Toasts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+
 
 /**
  * Created by chentong on 2017/11/8.
@@ -78,23 +79,19 @@ public class FragmentThree extends Fragment implements ISelectView, ShopcartAdap
     private int totalCount = 0;// 购买的商品总数量
     private int flag = 0;
     private ArrayList<Select.DataBean> goodlist;
-
+    SelectPresenter cartpresenter;
+    int uid;
+   // Unbinder unbinder;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_three, null);
 
-        SelectPresenter cartpresenter = new SelectPresenter(this);
-        int uid = (int) SharePresenters.get("yonghu", 1000);
+         ButterKnife.inject(this, view);
+         cartpresenter = new SelectPresenter(this);
+         uid = (int) SharePresenters.get("yonghu",2565);
         cartpresenter.getdate(uid + "");
-        ButterKnife.inject(this, view);
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
     }
     private void initEvents() {
         selva = new ShopcartAdapter(groups, children, getActivity());
@@ -147,6 +144,7 @@ public class FragmentThree extends Fragment implements ISelectView, ShopcartAdap
                     toBeDeleteProducts.add(childs.get(j));
                 }
             }
+            cartpresenter= new SelectPresenter(this);
             childs.removeAll(toBeDeleteProducts);
         }
         groups.removeAll(toBeDeleteGroups);
@@ -392,16 +390,17 @@ public class FragmentThree extends Fragment implements ISelectView, ShopcartAdap
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
         setCartNum();
+        cartpresenter.getdate(uid + "");
     }
 
     @Override
     public void GetCartDate(Select cartGoods) {
         goodlist= (ArrayList<Select.DataBean>) cartGoods.getData();
+        Log.d("88888",goodlist.size()+"");
         for (int i = 0; i < goodlist.size(); i++) {
             groups.add(new StoreInfo(goodlist.get(i).getSellerid(), goodlist.get(i).getSellerName()));
             List<GoodsInfo> products = new ArrayList<GoodsInfo>();
@@ -409,10 +408,11 @@ public class FragmentThree extends Fragment implements ISelectView, ShopcartAdap
             for (int j = 0; j <arr.size(); j++) {
                 String imgs=arr.get(j).getImages();
                 String[] img=imgs.split("\\|");
-                products.add(new GoodsInfo(arr.get(j).getPid(), "商品",arr.get(j).getTitle() , arr.get(j).getPrice(),arr.get(j).getNum() + 1, "豪华", "1", img[2],arr.get(j).getBargainPrice()));
+                products.add(new GoodsInfo(arr.get(j).getPid(), "商品",arr.get(j).getTitle() , arr.get(j).getPrice(),arr.get(j).getNum() + 1, "豪华", "1", img[2], 6.00 + arr.get(j).getBargainPrice()));
             }
             children.put(groups.get(i).getId(), products);// 将组元素的一个唯一值，这里取Id，作为子元素List的Key
         }
         initEvents();
     }
+
 }

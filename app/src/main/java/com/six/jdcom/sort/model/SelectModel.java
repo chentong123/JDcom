@@ -30,16 +30,8 @@ public class SelectModel implements ISelectModel{
     public SelectModel(Setdate setdate) {
         this.setdate = setdate;
     }
-    private OnSelectFinish onFinish;
 
 
-    public interface OnSelectFinish{
-        void OnFinishListener(List<Select.DataBean> list);
-    }
-
-    public void setOnFinish(OnSelectFinish finish){
-        this.onFinish=finish;
-    }
     @Override
     public void GetCartDate(String uid) {
         Retrofit retrofit = new Retrofit.Builder()
