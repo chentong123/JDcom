@@ -1,8 +1,12 @@
 package com.six.jdcom.mine.model;
 
+import android.util.Log;
+
 import com.six.jdcom.mine.bean.Login;
+import com.six.jdcom.mine.bean.Register;
 import com.six.jdcom.mine.presenter.PresenterRegister;
 import com.six.jdcom.utils.RetorFactoryLogin;
+import com.six.jdcom.utils.SharePresenters;
 
 import java.util.HashMap;
 
@@ -32,23 +36,22 @@ public class ModelRegister implements IModelRegister{
         HashMap<String,String> map=new HashMap<>();
         map.put("mobile",uname1);
         map.put("password",upass1);
+        Log.d("11111",map.toString());
         RetorFactoryLogin.getInstance().getRegister("user/reg",map)
-        .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Login>() {
+                .subscribe(new Observer<Register>() {
+            @Override
+            public void onCompleted() {
+            }
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+            }
                     @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Login login) {
+                    public void onNext(Register login) {
                         code=login.getCode();
+                        Log.d("1111111111",login.getMsg());
                         onRegisterFinish.RegisterFinish(code);
                     }
                 });

@@ -49,8 +49,13 @@ public class ModelLogin implements IModelLogin{
 
             @Override
             public void onNext(Login loginBase) {
-                code = loginBase.getCode();
                 SharePresenters.put("isLogin",true);
+                code = loginBase.getCode();
+                if (code=="0")
+                {
+
+                    SharePresenters.put("yonghu",loginBase.getData().getUid());
+                }
                 onLoginFinish.LoginFinish(code);
             }
         });

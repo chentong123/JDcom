@@ -38,7 +38,8 @@
         <activity android:name=".activity.BannerActivity" />
         <activity android:name=".home.ShopActivity" />
         <activity android:name=".home.XiangqingActivty" />
-        <activity android:name=".home.ListActivity"></activity>
+        <activity android:name=".home.ListActivity" />
+        <activity android:name=".home.activity.OrderActivity"></activity>
     </application>
 
 </manifest>

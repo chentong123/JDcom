@@ -16,7 +16,7 @@ public class PresenterRegister implements ModelRegister.OnRegisterFinish{
         modelRegister = new ModelRegister();
         modelRegister.setOnRegisterFinish(this);
     }
-    public  void setRegisterUrl(String uname1,String upass1)
+    public void setRegisterUrl(String uname1, String upass1)
     {
         modelRegister.getRegisterUrl(uname1,upass1);
     }

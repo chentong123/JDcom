@@ -17,6 +17,7 @@ import com.six.jdcom.activity.MainActivity;
 import com.six.jdcom.mine.bean.UserLogin;
 import com.six.jdcom.mine.presenter.PresenterLogin;
 import com.six.jdcom.mine.view.IViewLogin;
+import com.six.jdcom.utils.MyApp;
 import com.six.jdcom.utils.SharePresenters;
 
 import org.greenrobot.eventbus.EventBus;
@@ -90,11 +91,11 @@ public class LoginActivity extends AppCompatActivity implements IViewLogin {
     @Override
     public void success(String code) {
         if("0".equals(code)){
-            SharePresenters.put("islogin",true);
+            SharePresenters.put("isLogin",true);
 
-           // finish();
            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-        }else{
+        }
+        else{
             Toast.makeText(LoginActivity.this, "账号或密码错误~", Toast.LENGTH_SHORT).show();
         }
     }
