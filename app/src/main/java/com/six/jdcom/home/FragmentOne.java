@@ -1,6 +1,7 @@
 package com.six.jdcom.home;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -56,6 +57,7 @@ public class FragmentOne extends Fragment implements IUserView{
         userPresenter.setNews(Api.PRO_URL);
 
         ButterKnife.inject(this, view);
+        search.setHintTextColor(Color.WHITE);
         //加布局管理器
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

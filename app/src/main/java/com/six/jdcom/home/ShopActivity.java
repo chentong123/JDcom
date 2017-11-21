@@ -33,7 +33,7 @@ public class ShopActivity extends AppCompatActivity implements Kview {
     private LeftAdapter leftAdapter;
     private RightAdapter rightadapter;
     private int count = 1;
-    private HashMap<String, String> rMap;
+    private HashMap<String, String> rMap,rMap1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,9 @@ public class ShopActivity extends AppCompatActivity implements Kview {
         rMap = new HashMap<>();
 //        rMap.put("cid","1");
 //        kpresent.getpright(rMap,"product/getProductCatagory");
+        rMap1 = new HashMap<>();
+        rMap1.put("cid","1");
+        kpresent.getpright(rMap1,"product/getProductCatagory");
 
     }
 

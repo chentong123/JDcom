@@ -1,5 +1,6 @@
 package com.six.jdcom.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.six.jdcom.R;
+import com.six.jdcom.home.activity.OrderActivity;
 import com.six.jdcom.home.bean.Add;
+import com.six.jdcom.home.bean.Order;
 import com.six.jdcom.home.bean.Shop;
 import com.six.jdcom.home.common.PlayerManager;
 import com.six.jdcom.home.widget.media.IjkVideoView;
@@ -60,13 +63,13 @@ public class XiangqingActivty extends AppCompatActivity implements PlayerManager
 
     private String url4 = "http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/16/1989823-102-086-0009.mp4";
     private PlayerManager player;
+    private String price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xiangqing_activty);
         ButterKnife.inject(this);
-
         //注册事件
         EventBus.getDefault().register(this);
         Map<String, String> map = new HashMap<>();
@@ -92,7 +95,8 @@ public class XiangqingActivty extends AppCompatActivity implements PlayerManager
                     @Override
                     public void onNext(Shop chuan) {
                         textView3.setText(chuan.getData().getSubhead());
-                        textView4.setText(chuan.getData().getPrice());
+                        price = chuan.getData().getPrice();
+                        textView4.setText(price);
                         String images = chuan.getData().getImages();
                         String[] split = images.split("[|]");
                         String[] split1 = split[0].split("[!]");
@@ -164,15 +168,52 @@ public class XiangqingActivty extends AppCompatActivity implements PlayerManager
     @OnClick({R.id.button3, R.id.button4})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //创建订单
             case R.id.button3:
+                    int yonghu1= (int) SharePresenters.get("yonghu",2565);
+                final Map<String,String> map1=new HashMap<>();
+                map1.put("price",price);
+                map1.put("uid",yonghu1+"");
+                Retrofit build1 = new Retrofit.Builder().baseUrl(Api.SHOP)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+                ApiServer apishopservice1 = build1.create(ApiServer.class);
+                Observable<Order> order = apishopservice1.getOrder("product/createOrder", map1);
+                order.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<Order>() {
+                            @Override
+                            public void onCompleted() {
 
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(Order order) {
+                                String msg = order.getMsg();
+                                if ("订单创建成功".equals(msg))
+                                {
+                                    Toast.makeText(XiangqingActivty.this,"成功了",Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(XiangqingActivty.this, OrderActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(XiangqingActivty.this,"创建失败",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                 break;
             case R.id.button4:
-                int yonghu = (int) SharePresenters.get("yonghu", 1000);
+                //添加到购物车
+                int yonghu = (int) SharePresenters.get("yonghu",2565);
+                Toast.makeText(XiangqingActivty.this,"yonghu"+yonghu,Toast.LENGTH_SHORT).show();
                 Map<String, String> map = new HashMap<>();
                 map.put("pid", pid);
                 map.put("uid",yonghu+"");
-                Log.d("qqqqqqqqqqqqqqqqqqqqqqqqq",map.toString());
+               // Log.d("qqqqqqqqqqqqqqqqqqqqqqqqq",map.toString());
                 Retrofit build = new Retrofit.Builder().baseUrl(Api.SHOP)
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
