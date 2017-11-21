@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        islogin =(boolean) SharePresenters.get("islogin", false);
+        islogin =(boolean) SharePresenters.get("isLogin", false);
     }
     private void init()
     {
