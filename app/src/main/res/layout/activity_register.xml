@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bwie.mango.ZhuceActivity">
+    tools:context=".mine.RegisterActivity">
     <EditText
         android:id="@+id/zc_user"
         android:hint="请输入用户名"
